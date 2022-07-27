@@ -21,16 +21,14 @@ for word in poems[index:]:
 		chain[key] = [word]
 	index += 1
 
-
-
 word1 = random.choice(list(chain.keys())) #random first word
 message = word1.capitalize()
 
 # # Picks the next word over and over until word count achieved
-# while len(message.split(' ')) < count:
-# 	word2 = random.choice(chain[word1])
-# 	word1 = word2
-# 	message += ' ' + word2
+while len(message.split(' ')) < count:
+	word2 = random.choice(chain[word1])
+	word1 = word2
+	message += ' ' + word2
 
 # # creates new file with output and prints it to the terminal
 # with open("output.txt", "w") as file:
