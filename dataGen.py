@@ -16,16 +16,12 @@ def clean_array(dirty_array):
     return clean_array
 
 for dataset in os.listdir(os.path.join(sys.path[0], GENERATION_FILEPATH)):
-	print(dataset)
 	data_directory = os.path.join(sys.path[0], GENERATION_FILEPATH+"\\"+dataset)
-	print(data_directory)
  
 	all_lines = []
 
-	for generation_file in os.listdir(data_directory):
-		
+	for generation_file in os.listdir(data_directory):		
 		file_path = os.path.join(sys.path[0], GENERATION_FILEPATH+"\\"+dataset+"\\"+generation_file)
-		print(file_path)
   
 		lines = open(file_path, "r").read()
 		lines = ''.join([i for i in lines if not i.isdigit()]).replace("\n", " ").split(' ')
@@ -44,10 +40,10 @@ for dataset in os.listdir(os.path.join(sys.path[0], GENERATION_FILEPATH)):
 			chain[key] = [word]
 		index += 1
 
-	print(list(chain.keys()))
-
 	chain_file_path = os.path.join(sys.path[0], RESULT_FILEPATH+"\\"+dataset+".json")
 	chain_json = json.dumps(chain, indent = 4)
 	with open(chain_file_path, "w") as file:
 		file.write(chain_json)
+  
+
  
