@@ -55,11 +55,12 @@ def main():
             word1 = word2
             message += ' ' + word2
 
-        s3_object_body = json.dumps(chain, indent = 4)
+        json_object_body = json.dumps(chain, indent = 4)
 
         print("starting upload...")
 
-        sendDataTos3(bucket_name, file["object_path"], s3_object_body)
+        sendDataTos3(bucket_name, file["object_path"], json_object_body)
+        sendDataToDB(json_object_body)
         
         print("Completed!")
 
@@ -78,6 +79,10 @@ def sendDataTos3(bucket_name, s3_object, s3_object_body):
     )
 
     assert s3_object_body == text_file_from_s3
-    
+
+def sendDataToDB(data_object):
+    print("db")
+
+
 if __name__=="__main__":
     main()
