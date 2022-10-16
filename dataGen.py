@@ -11,6 +11,11 @@ def clean_array(dirty_array):
     for elem in dirty_array:
         clean_string = elem.replace('[', '')
         clean_string = clean_string.replace(']', '')
+        clean_string = clean_string.replace('(', '')
+        clean_string = clean_string.replace(')', '')
+        clean_string = clean_string.replace(',', '')
+        clean_string = clean_string.replace('\'', '')
+        clean_string = clean_string.replace('"', '')
         clean_array.append(clean_string)
         
     return clean_array
@@ -31,8 +36,7 @@ def generateChain():
 
 		index = 1
 		chain = {}
-		count = 200 # Desired word count of output
-		print(len(lines))
+		
 		for word in all_lines[index:]: 
 			key = all_lines[index - 1]
 			if key in chain:
@@ -41,7 +45,14 @@ def generateChain():
 				chain[key] = [word]
 			index += 1
 
-		chain_file_path = os.path.join(sys.path[0], RESULT_FILEPATH+"\\"+dataset+".json")
 		chain_json = json.dumps(chain, indent = 4)
-		with open(chain_file_path, "w") as file:
-			file.write(chain_json)
+	
+	return chain_json
+
+def generateTextFromChain(input_chain, message_count):
+	word1 = random.choice(list(input_chain.keys())) #random first word
+	message = word1.capitalize()
+	while len(message.split(' ')) < message_count:
+		word2 = random.choice(input_chain[word1])
+		word1 = word2
+		message += ' ' + word2

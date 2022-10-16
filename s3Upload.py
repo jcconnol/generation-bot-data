@@ -6,12 +6,11 @@ import hashlib
 #TODO read movie data, build markov object and save to movie-[genre].json
 #TODO read song data, build markov object and save to song-[genre].json
 
-def s3Upload(bucket_name, object_path, file_path):
+def s3Upload(bucket_name, object_path, upload_text):
     
-    print("starting upload of {}".format(file_path))
-    json_object_body = open(file_path, "r").read()
+    print("starting upload of {}".format(object_path))
 
-    sendDataTos3(bucket_name, object_path, json_object_body)
+    sendDataTos3(bucket_name, object_path, upload_text)
     
     print("Completed!")
 

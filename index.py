@@ -1,4 +1,5 @@
 from dataGen import generateChain
+from dataGen import generateTextFromChain
 from s3Upload import s3Upload
 
 bucket_name = "bot-gen"
@@ -22,12 +23,12 @@ def main():
         }
     ]
     
-    generateChain()
-    
     for generated_chain in s3_file_array:
-        print(generated_chain)
-        s3Upload(bucket_name, generated_chain["object_path"], generated_chain["list_file"])
-
+        generated_chain = generateChain(generated_chain["list_file"])
+        
+        generated_text = generateTextFromChain(generated_chain)
+        
+        s3Upload(bucket_name, generated_chain["object_path"], generated_text)
 
 if __name__=="__main__":
     main()
