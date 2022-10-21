@@ -15,13 +15,13 @@ def main():
         {
             "object_path": "rapSongs.json",
             "list_file": "./result_objects/rapSongLyrics.json",
-            "set_generation": "\\generation_sets\tweets",
+            "set_generation": "\\generation_sets\\rapSongLyrics",
             "word_limit": 500
         },
         {
             "object_path": "tweets.json",
             "list_file": "./result_objects/tweets.json",
-            "set_generation": "\\generation_sets\tweets",
+            "set_generation": "\\generation_sets\\tweets",
             "word_limit": 500
         }
     ]
