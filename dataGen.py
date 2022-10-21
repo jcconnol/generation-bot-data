@@ -20,39 +20,41 @@ def clean_array(dirty_array):
         
     return clean_array
 
-def generateChain():
-	for dataset in os.listdir(os.path.join(sys.path[0], GENERATION_FILEPATH)):
-		data_directory = os.path.join(sys.path[0], GENERATION_FILEPATH+"\\"+dataset)
+def generateChain(object):
 	
-		all_lines = []
-
-		for generation_file in os.listdir(data_directory):		
-			file_path = os.path.join(sys.path[0], GENERATION_FILEPATH+"\\"+dataset+"\\"+generation_file)
 	
-			lines = open(file_path, "r").read()
-			lines = ''.join([i for i in lines if not i.isdigit()]).replace("\n", " ").split(' ')
-			lines = clean_array(lines)
-			all_lines.extend(lines)
+	all_lines = []
+	data_directory = os.getcwd() + object["set_generation"]
+	print(data_directory)
+	for generation_file in os.listdir(data_directory):		
+		file_path = os.path.join(sys.path[0], data_directory+"\\"+generation_file)
 
-		index = 1
-		chain = {}
-		
-		for word in all_lines[index:]: 
-			key = all_lines[index - 1]
-			if key in chain:
-				chain[key].append(word)
-			else:
-				chain[key] = [word]
-			index += 1
+		lines = open(file_path, "r").read()
+		lines = ''.join([i for i in lines if not i.isdigit()]).replace("\n", " ").split(' ')
+		lines = clean_array(lines)
+		all_lines.extend(lines)
 
-		chain_json = json.dumps(chain, indent = 4)
+	index = 1
+	chain = {}
 	
-	return chain_json
+	for word in all_lines[index:]: 
+		key = all_lines[index - 1]
+		if key in chain:
+			chain[key].append(word)
+		else:
+			chain[key] = [word]
+		index += 1
+	
+	return chain
 
-def generateTextFromChain(input_chain, message_count):
+def generateTextFromChain(input_chain, max_message_count):
+    
 	word1 = random.choice(list(input_chain.keys())) #random first word
+
 	message = word1.capitalize()
-	while len(message.split(' ')) < message_count:
+	while len(message.split(' ')) < max_message_count:
 		word2 = random.choice(input_chain[word1])
 		word1 = word2
 		message += ' ' + word2
+
+	return message
