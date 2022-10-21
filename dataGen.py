@@ -53,8 +53,11 @@ def generateTextFromChain(input_chain, max_message_count):
 
 	message = word1.capitalize()
 	while len(message.split(' ')) < max_message_count:
-		word2 = random.choice(input_chain[word1])
-		word1 = word2
-		message += ' ' + word2
+		if word1 in input_chain:
+			word2 = random.choice(input_chain[word1])
+			word1 = word2
+			message += ' ' + word2
+		else:
+			break
 
 	return message
