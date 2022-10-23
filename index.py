@@ -29,8 +29,13 @@ def main():
     for object in s3_file_array:
         generated_chain = generateChain(object)
 
-        generated_text = generateTextFromChain(generated_chain, object["word_limit"])
-        print(generated_text)
+        generated_text = ""
+        
+        for _ in range(2):
+            generated_text = generateTextFromChain(generated_chain, object["word_limit"])
+            generated_text += "\n|||||||||||||||||||||"
+            print(generated_text)
+        
         s3Upload(bucket_name, object["object_path"], generated_text)
 
 if __name__=="__main__":
