@@ -31,7 +31,7 @@ def main():
 
         generated_text = ""
         
-        for _ in range(2):
+        for _ in range(200):
             generated_text = generateTextFromChain(generated_chain, object["word_limit"])
             generated_text += "\n|||||||||||||||||||||"
             print(generated_text)

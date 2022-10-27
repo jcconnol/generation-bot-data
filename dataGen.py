@@ -61,11 +61,8 @@ def generateTextFromChain(input_chain, max_message_count):
 			message += ' ' + word2
 		else:
 			break
-<<<<<<< HEAD
 		
 	return message
-=======
->>>>>>> 9133aebe80b0cdd88985a7278368fa452a16c149
 
 def remove_non_ascii(s):
     return "".join(c for c in s if ord(c)<128)
