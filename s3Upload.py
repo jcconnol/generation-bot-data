@@ -2,13 +2,17 @@ import boto3
 import random
 import json
 import hashlib
+import os
 
 # send to s3 bucket
-def s3Upload(bucket_name, object_path, upload_text):
+def s3Upload(bucket_name, object_path, upload_file_path):
     print("starting upload of {}".format(object_path))
     
     s3_resource = boto3.resource("s3")
 
+    full_upload_file_path = os.getcwd() + "\\" + upload_file_path
+    upload_text = open(full_upload_file_path, "r").read()
+    
     s3_object_body = upload_text.encode('utf-8', errors='ignore')
 
     upload_result = s3_resource.Object(bucket_name, object_path).put(Body=s3_object_body)
