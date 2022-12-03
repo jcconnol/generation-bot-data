@@ -4,7 +4,7 @@ import json
 import os
 
 GENERATION_FILEPATH = "generation_sets"
-RESULT_FILEPATH = "result_objects"
+RESULT_FILEPATH = "chain_objects"
 
 def clean_array(dirty_array):
     clean_array = []
@@ -15,7 +15,7 @@ def clean_array(dirty_array):
         
     return clean_array
 
-def generateChain():
+def generateChains():
 	for dataset in os.listdir(os.path.join(sys.path[0], GENERATION_FILEPATH)):
 		data_directory = os.path.join(sys.path[0], GENERATION_FILEPATH+"\\"+dataset)
 	
@@ -32,6 +32,7 @@ def generateChain():
 		index = 1
 		chain = {}
 		count = 200 # Desired word count of output
+  
 		print(len(lines))
 		for word in all_lines[index:]: 
 			key = all_lines[index - 1]
@@ -45,3 +46,11 @@ def generateChain():
 		chain_json = json.dumps(chain, indent = 4)
 		with open(chain_file_path, "w") as file:
 			file.write(chain_json)
+   
+def generateUploadObjects(generation_object):
+    print("generating")
+    
+    print(generation_object)
+    
+    
+    

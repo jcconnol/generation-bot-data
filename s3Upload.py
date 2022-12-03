@@ -30,4 +30,3 @@ def sendDataTos3(bucket_name, s3_object, s3_object_body):
     )
 
     assert s3_object_body == text_file_from_s3
-
