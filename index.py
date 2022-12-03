@@ -33,6 +33,5 @@ def main():
         generateUploadObjects(generation_object)
         # s3Upload(bucket_name, generation_object["object_path"], generation_object["list_file"])
 
-
 if __name__=="__main__":
     main()

@@ -3,15 +3,17 @@ import random
 import json
 import hashlib
 
-#TODO read movie data, build markov object and save to movie-[genre].json
-#TODO read song data, build markov object and save to song-[genre].json
-
-def s3Upload(bucket_name, object_path, file_path):
+# send to s3 bucket
+def s3Upload(bucket_name, object_path, upload_text):
+    print("starting upload of {}".format(object_path))
     
-    print("starting upload of {}".format(file_path))
-    json_object_body = open(file_path, "r").read()
+    s3_resource = boto3.resource("s3")
 
-    sendDataTos3(bucket_name, object_path, json_object_body)
+    s3_object_body = upload_text.encode('utf-8', errors='ignore')
+
+    upload_result = s3_resource.Object(bucket_name, object_path).put(Body=s3_object_body)
+
+    assert upload_result["ResponseMetadata"]["HTTPStatusCode"] == 200
     
     print("Completed!")
 
